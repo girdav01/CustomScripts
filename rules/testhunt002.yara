@@ -7,11 +7,11 @@ rule testhunt002
  		date = "2021-06-22"
     strings:
         $a1 = "PuTTY"
-		$a2 = "SSH-2"
-		$a3 = "SSH-1"
-		$a4 = "sshtty"
-		$a5 = "config-ssh-xauthority"
-		$a6 = "config-ssh-pty"
+	$a2 = "SSH-2"
+	$a3 = "SSH-1"
+	$a4 = "sshtty"
+	$a5 = "config-ssh-xauthority"
+	$a6 = "config-ssh-pty"
     condition:
-        3 of them
+        5 of them
 }
