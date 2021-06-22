@@ -1,6 +1,5 @@
 rule testhunt001
 {
-  
     meta:
  		weight = 1
 		desc = "Hunt for api.mutinyhq.io"
