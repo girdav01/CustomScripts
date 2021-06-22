@@ -1,4 +1,3 @@
-# $yarafile = $args[0]
 $yarafile =  "https://raw.githubusercontent.com/girdav01/CustomScripts/main/rules/testhunt002.yara"
 $ProgressPreference = "SilentlyContinue"
 $DumpFilePath = "\\ARGOSSERVER\ir2"
@@ -29,7 +28,8 @@ function ScanProcesses{
     else {
     Clear-Host
     Write-Host "Downloading Yara"
-    Invoke-WebRequest -Uri "https://github.com/VirusTotal/yara/releases/download/v4.0.5/yara-v4.0.5-1554-win64.zip" -OutFile ".\yara64.zip"
+    #Invoke-WebRequest -Uri "https://github.com/VirusTotal/yara/releases/download/v4.0.5/yara-v4.0.5-1554-win64.zip" -OutFile ".\yara64.zip"
+    Invoke-WebRequest -Uri "https://github.com/VirusTotal/yara/releases/download/v4.1.1/yara-v4.1.1-1635-win64.zip" -OutFile ".\yara64.zip"
     Expand-Archive yara64.zip -Force
     Clear-Host
     Write-Host "Scanning Processes"
