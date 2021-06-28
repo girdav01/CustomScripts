@@ -7,6 +7,9 @@ rule testhunt004
  		date = "2021-06-28"
     strings:
         $a1 = "MyMaliciousMutexPOC"
+	$a2 = "MyMaliciousMutexPOC" wide
+	$a3 = "MyMaliciousMutexPOC" wide ascii
+	$a4 = "MyMaliciousMutexPOC" nocase
     condition:
-        1 of them
+        any of them
 }
