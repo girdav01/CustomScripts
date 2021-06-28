@@ -11,5 +11,5 @@ rule testhunt004
 	$a3 = "MyMaliciousMutexPOC" wide ascii
 	$a4 = "MyMaliciousMutexPOC" nocase
     condition:
-        any of them
+        $a2
 }
