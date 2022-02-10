@@ -1,15 +1,19 @@
 # Trend Micro Vision One script to disable vulnerability in Tableau Desktop
+# This script is not supported, it is a demo only. Make your own test 
+# TODO : check Tableau version numbers and only run on affected versions. these are not affected : 2021.4.2+, 2021.3.6+, 2021.2.7+, 2021.1.10+, 2020.4.13+ 
 # Note: TMV1 Custom scripting run as administrator. But if you wish to run this script manually, make sure you are administrator
 # Reference : https://kb.tableau.com/articles/issue/apache-log4j2-vulnerability-log4shell-tableau-desktop-mitigation-steps
 Write-Host "Trend Micro Vision One script to disable vulnerability in Tableau Desktop"
 Write-Host "#1 Downloading 7z.exe"
 $toolfolder = "c:\7zip"
+$zip = "7z.exe"
+$7zFullPath = Join-Path $toolfolder $zip
 New-Item $toolfolder -ItemType Directory -Force
-Invoke-WebRequest -Uri "https://github.com/girdav01/CustomScripts/raw/main/win/7z.exe" -OutFile "c:\7zip\7z.exe"
-Start-Sleep -Seconds 2
-# Searching for Tableau folders
-$rootFolder = "C:\Program Files\Tableau" ##Tableau root install folder###
-$NameToFind = "Tableau Public 20*" ## folder name for the different versions
+Invoke-WebRequest -Uri "https://github.com/girdav01/CustomScripts/raw/main/win/7z.exe" -OutFile $7zFullPath
+Start-Sleep -Seconds 2  # sleep to make sure the file is writen
+# Searching for Tableau folders, there might be more than one
+$rootFolder = "C:\Program Files\Tableau" #Tableau root install folder
+$NameToFind = "Tableau Public 20*" #folder name for the different versions
 
 # check if Tableau folder is there
 if ( -not (Test-Path -path $rootFolder)) {
