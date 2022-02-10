@@ -1,8 +1,10 @@
-﻿# Trend Micro Vision One script to disable vulnerability in Tableau Desktop
+# Trend Micro Vision One script to disable vulnerability in Tableau Desktop
+# Note: TMV1 Custom scripting run as administrator. But if you wish to run this script manually, make sure you are administrator
 # Reference : https://kb.tableau.com/articles/issue/apache-log4j2-vulnerability-log4shell-tableau-desktop-mitigation-steps
 Write-Host "Trend Micro Vision One script to disable vulnerability in Tableau Desktop"
 Write-Host "#1 Downloading 7z.exe"
-New-Item c:\7zip -ItemType Directory -Force
+$toolfolder = "c:\7zip"
+New-Item $toolfolder -ItemType Directory -Force
 Invoke-WebRequest -Uri "https://github.com/girdav01/CustomScripts/raw/main/win/7z.exe" -OutFile "c:\7zip\7z.exe"
 Start-Sleep -Seconds 2
 # Searching for Tableau folders
@@ -12,6 +14,7 @@ $NameToFind = "Tableau Public 20*" ## folder name for the different versions
 # check if Tableau folder is there
 if ( -not (Test-Path -path $rootFolder)) {
     Write-Host $rootFolder "directory does not exist"
+    Write-Host "There was no Tableau installed on this computer"
     Exit
 } else {
     Write-Host $rootFolder "exist, we are fine"
@@ -60,9 +63,16 @@ foreach ($curfolder in $subfolderslist)
         Set-ItemProperty jdbcserver.jar -Name IsReadOnly -Value $true
         Write-Host "#16. Re-enable ReadOnly on oauthservice.jar"
         Set-ItemProperty oauthservice.jar -Name IsReadOnly -Value $true
-        Write-Host $curFolder.Name.ToString() "secured"
+        Write-Host $curFolder.Name.ToString() "secured !!!!!!!!!!!"
     }
       
 }
+# cleanup downloaded tools
+if (Test-Path $toolfolder) {
+    Remove-Item $toolfolder -Force
+    Write-Host 'Delete downloaded tools folder' $toolfolder 
+}
+else {Write-host "Folder does not exist" $toolfolder}
+Write-Host "Script endded normally"
 
 
